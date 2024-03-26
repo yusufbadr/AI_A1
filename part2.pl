@@ -19,11 +19,11 @@ calcPriceOfItems([], 0).
 
 % pbl6
 isBoycott(Company) :-
-    boycott_company(Company, _).
+    boycott_company(Company, _), !.
 
 isBoycott(Item) :-
     item(Item, Company, _),
-    isBoycott(Company).
+    isBoycott(Company), !.
 
 
 
@@ -34,7 +34,7 @@ removeBoycottItemsFromAnOrder(CustomerName, OrderId, NewList) :-
     removeBoycottItemsFromList(Items, NewList, []).
 
 removeBoycottItemsFromList([Item|Rest], NewList, PlaceHolder) :-
-    isBoycott(Item),
+    isBoycott(Item), !,
     removeItemFromList(Item, [Item|Rest], TempNewList1),
     removeBoycottItemsFromList(TempNewList1, TempNewList2, PlaceHolder),
     %NewList is TempNewList2.
