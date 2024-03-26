@@ -19,4 +19,11 @@ whyToBoycott(Item, Justification):-
 whyToBoycott(Company, Justification):-
     boycott_company(Company, Justification).
 
+%pb11
+
+getTheDifferenceInPriceBetweenItemAndAlternative(ItemA, ItemB, Diff):-
+    alternative(ItemA, ItemB),
+    item(ItemA, _, P1),
+    item(ItemB, _, P2),
+    Diff is P1 - P2.
 
