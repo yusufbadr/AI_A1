@@ -1,5 +1,8 @@
 :-consult(data).
 :-consult(impl_predicates).
+:- dynamic item/3. 
+:- dynamic alternative/2.
+:- dynamic boycott_company/2.
 
 
 % pbl 5
@@ -88,3 +91,26 @@ replaceBoycottItemsInList([Item|Rest], NewList) :-
 
 replaceBoycottItemsInList([], NewList) :-
     assignList(assign, NewList, []).
+
+
+
+% pbl 12
+add_item(ItemName, Company, Price) :-
+    assertz(item(ItemName, Company, Price)).
+
+remove_item(ItemName, Company, Price) :-
+    retract(item(ItemName, Company, Price)).
+
+
+add_alternative(ItemName, AlternativeName) :-
+    assertz(alternative(ItemName, AlternativeName)).
+
+remove_alternative(ItemName, AlternativeName) :- 
+    retract(alternative(ItemName, AlternativeName)).
+
+
+add_boycott_company(Company, Justification) :- 
+    assertz(boycott_company(Company, Justification)).
+
+remove_boycott_company(Company, Justification) :-
+    retract(boycott_company(Company, Justification)).
