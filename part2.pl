@@ -38,7 +38,8 @@ removeBoycottItemsFromList([Item|Rest], NewList, PlaceHolder) :-
     removeItemFromList(Item, [Item|Rest], TempNewList1),
     removeBoycottItemsFromList(TempNewList1, TempNewList2, PlaceHolder),
     %NewList is TempNewList2.
-    assignList(assign, NewList, TempNewList2).
+    assignList(assign, NewList, TempNewList2),
+    !.
 
 removeBoycottItemsFromList([Item|Rest], NewList, PlaceHolder) :-
     \+ isBoycott(Item),
@@ -67,13 +68,15 @@ replaceBoycottItemsInList([Item|Rest], NewList) :-
     removeItemFromList(Item, [Item|Rest], ListAfterRemove),
     alternative(Item, AlternativeItem),
     assignList(assign, [AlternativeItem|ListAfterRemove], ListAfterReplace),
-    replaceBoycottItemsInList(ListAfterReplace, NewList).
+    replaceBoycottItemsInList(ListAfterReplace, NewList),
+    !.
 
 
 replaceBoycottItemsInList([Item|Rest], NewList) :-
     \+ isBoycott(Item),
     replaceBoycottItemsInList(Rest, TempNewList),
-    assignList(assign, NewList, [Item|TempNewList]).
+    assignList(assign, NewList, [Item|TempNewList]),
+    !.
 
 
 replaceBoycottItemsInList([Item|Rest], NewList) :-
